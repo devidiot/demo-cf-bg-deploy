@@ -1,0 +1,22 @@
+---
+_schema-version: '3.1'
+ID: bg-deploy-demo
+version: 1.0.4
+description: "bg-deploy-demo application"
+parameters:
+  enable-parallel-deployments: true
+modules:
+  - name: bg-deploy-demo
+    type: java
+    path: .
+    properties:
+      SPRING_PROFILES_ACTIVE: cloud
+    parameters:
+      buildpack: sap_java_buildpack
+    build-parameters:
+      timeout: 30m0s
+      build-result: target/*.[wj]ar
+      builder: custom
+      commands:
+        - mvn clean install
+
