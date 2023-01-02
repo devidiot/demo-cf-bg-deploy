@@ -1,7 +1,7 @@
 ---
 _schema-version: '3.1'
 ID: bg-deploy-demo
-version: 1.0.4
+version: 1.0.5
 description: "bg-deploy-demo application"
 parameters:
   enable-parallel-deployments: true
@@ -19,4 +19,11 @@ modules:
       builder: custom
       commands:
         - mvn clean install
-
+    requires:
+      - name: bg-deploy-demo-logs
+resources:
+  - name: bg-deploy-demo-logs
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: application-logs
+      service-plan: lite
